@@ -1,14 +1,15 @@
-module terraform-provider-ossca-sunwupark
+module terraform-provider-sunwupark-ossca
 
-go 1.22.4
+go 1.22
 
 require (
 	github.com/hashicorp/terraform-plugin-docs v0.19.4
 	github.com/hashicorp/terraform-plugin-framework v1.9.0
 	github.com/hashicorp/terraform-plugin-go v0.23.0
 	github.com/hashicorp/terraform-plugin-log v0.9.0
-	// github.com/hashicorp/terraform-plugin-testing v1.8.0
+	github.com/hashicorp/terraform-plugin-testing v1.8.0
 	github.com/sunwupark/hashicups-client-go v1.0.0
+)
 
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect

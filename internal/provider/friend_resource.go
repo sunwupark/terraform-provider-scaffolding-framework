@@ -127,7 +127,7 @@ func (r *friendResource) Read(ctx context.Context, req resource.ReadRequest, res
 		return
 	}
 
-	if len(friendID) == 0 {
+	if len(friends) == 0 {
 		resp.Diagnostics.AddError(
 			"Cafe Not Found",
 			"No cafe found with the given ID",
@@ -135,7 +135,7 @@ func (r *friendResource) Read(ctx context.Context, req resource.ReadRequest, res
 		return
 	}
 
-	friend := friendID[0]
+	friend := friends[0]
 
 	// Map response body to model
 	state.ID = types.StringValue(strconv.Itoa(friend.ID))
@@ -152,8 +152,8 @@ func (r *friendResource) Read(ctx context.Context, req resource.ReadRequest, res
 	}
 }
 
-func (r *freindResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var plan freindResourceModel
+func (r *friendResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var plan friendResourceModel
 	diags := req.Plan.Get(ctx, &plan)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
@@ -180,7 +180,7 @@ func (r *freindResource) Update(ctx context.Context, req resource.UpdateRequest,
 	}
 
 	// Update the existing cafe
-	updatedFriend, err := r.client.UpdateCafe(plan.ID.ValueString(), []hashicups.Friend{friend})
+	updatedFriend, err := r.client.UpdateFriend(plan.ID.ValueString(), []hashicups.Friend{friend})
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Error Updating HashiCups Cafe",
@@ -203,8 +203,8 @@ func (r *freindResource) Update(ctx context.Context, req resource.UpdateRequest,
 	}
 }
 
-func (r *cafeResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var state cafeResourceModel
+func (r *friendResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var state friendResourceModel
 	diags := req.State.Get(ctx, &state)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
